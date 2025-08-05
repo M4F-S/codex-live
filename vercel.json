@@ -1,0 +1,37 @@
+{
+  "version": 2,
+  "name": "codex-live",
+  "builds": [
+    {
+      "src": "src/server.ts",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "src/client/index.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "src/server.ts"
+    },
+    {
+      "src": "/ws",
+      "dest": "src/server.ts"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/src/client/index.html"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "PORT": "3000"
+  },
+  "functions": {
+    "src/server.ts": {
+      "runtime": "nodejs18.x"
+    }
+  }
+}
